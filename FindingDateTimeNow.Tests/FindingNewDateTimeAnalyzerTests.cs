@@ -37,7 +37,7 @@ namespace FindingDateTimeNow.Tests
 			Assert.AreEqual(newDiagnostic.DefaultSeverity, DiagnosticSeverity.Error);
 
 			var unspecifiedDiagnostic = diagnostics[1];
-			Assert.AreEqual(unspecifiedDiagnostic.Id, FindingNewDateTimeConstants.DiagnosticId);
+			Assert.AreEqual(unspecifiedDiagnostic.Id, FindingNewDateTimeConstants.UnspecifiedDiagnosticId);
 			Assert.AreEqual(unspecifiedDiagnostic.Description, FindingNewDateTimeConstants.Description);
 			Assert.AreEqual(unspecifiedDiagnostic.MessageFormat, FindingNewDateTimeConstants.UnspecifiedKindMessage);
 			Assert.AreEqual(unspecifiedDiagnostic.Category, "Usage");

@@ -17,7 +17,7 @@ namespace FindingDateTimeNow
 			FindingNewDateTimeConstants.DiagnosticId, FindingNewDateTimeConstants.Description,
 				FindingNewDateTimeConstants.FindingDateTimeNowMessage, "Usage", DiagnosticSeverity.Error, true);
 		private static DiagnosticDescriptor unspecifiedKindRule = new DiagnosticDescriptor(
-			FindingNewDateTimeConstants.DiagnosticId, FindingNewDateTimeConstants.Description,
+			FindingNewDateTimeConstants.UnspecifiedDiagnosticId, FindingNewDateTimeConstants.Description,
 				FindingNewDateTimeConstants.UnspecifiedKindMessage, "Usage", DiagnosticSeverity.Error, true);
 
 		public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
