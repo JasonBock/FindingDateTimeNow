@@ -64,7 +64,7 @@ public sealed class DateTimeTest
 			var diagnostic = diagnostics[0];
 			Assert.AreEqual(FindingNewDateTimeConstants.FindingDateTimeNowMessage,
 				diagnostic.GetMessage());
-			Assert.AreEqual(115, diagnostic.Location.SourceSpan.Start);
+			Assert.AreEqual(128, diagnostic.Location.SourceSpan.Start);
 			Assert.AreEqual(133, diagnostic.Location.SourceSpan.End);
 		}
 
@@ -88,7 +88,7 @@ public sealed class DateTimeTest
 			var diagnostic = diagnostics[0];
 			Assert.AreEqual(FindingNewDateTimeConstants.FindingDateTimeNowMessage,
 				diagnostic.GetMessage());
-			Assert.AreEqual(115, diagnostic.Location.SourceSpan.Start);
+			Assert.AreEqual(128, diagnostic.Location.SourceSpan.Start);
 			Assert.AreEqual(139, diagnostic.Location.SourceSpan.End);
 		}
 
@@ -156,7 +156,7 @@ public sealed class DateTimeTest
 			var diagnostic = diagnostics[0];
 			Assert.AreEqual(FindingNewDateTimeConstants.FindingDateTimeNowMessage,
 				diagnostic.GetMessage());
-			Assert.AreEqual(138, diagnostic.Location.SourceSpan.Start);
+			Assert.AreEqual(151, diagnostic.Location.SourceSpan.Start);
 			Assert.AreEqual(156, diagnostic.Location.SourceSpan.End);
 		}
 
@@ -181,7 +181,7 @@ public sealed class DateTimeTest
 			var diagnostic = diagnostics[0];
 			Assert.AreEqual(FindingNewDateTimeConstants.FindingDateTimeNowMessage,
 				diagnostic.GetMessage());
-			Assert.AreEqual(138, diagnostic.Location.SourceSpan.Start);
+			Assert.AreEqual(151, diagnostic.Location.SourceSpan.Start);
 			Assert.AreEqual(162, diagnostic.Location.SourceSpan.End);
 		}
 

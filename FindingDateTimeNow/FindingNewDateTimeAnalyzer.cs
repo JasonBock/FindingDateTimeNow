@@ -58,11 +58,11 @@ namespace FindingDateTimeNow
 
 					if (argument != null)
 					{
-						if (argument.Item2.Name == "Local" ||
-							argument.Item2.Name == "Unspecified")
+						if (argument.Value.ValueText == "Local" ||
+							argument.Value.ValueText == "Unspecified")
 						{
 							addDiagnostic(Diagnostic.Create(FindingNewDateTimeAnalyzer.changeDateTimeKindToUtcRule,
-								argument.Item1.GetLocation()));
+								argument.Value.GetLocation()));
 						}
 					}
 					else
@@ -74,19 +74,20 @@ namespace FindingDateTimeNow
 			}
 		}
 
-		private static Tuple<ArgumentSyntax, ISymbol> GetInvalidArgument(
+		private static SyntaxToken? GetInvalidArgument(
 			ObjectCreationExpressionSyntax creationToken, SemanticModel model)
 		{
 			foreach (var argument in creationToken.ArgumentList.Arguments)
 			{
-				if (argument.Expression is MemberAccessExpressionSyntax)
+				var argumentExpression = argument.Expression as MemberAccessExpressionSyntax;
+            if (argumentExpression != null)
 				{
-					var argumentSymbolNode = model.GetSymbolInfo(argument.Expression).Symbol;
+					var argumentSymbolNode = model.GetSymbolInfo(argumentExpression).Symbol;
 
 					if (argumentSymbolNode.ContainingType.ToDisplayString() ==
 						Values.ExpectedContainingDateTimeKindTypeDisplayString)
 					{
-						return new Tuple<ArgumentSyntax, ISymbol>(argument, argumentSymbolNode);
+						return argumentExpression.Name.Identifier;
 					}
 				}
 			}

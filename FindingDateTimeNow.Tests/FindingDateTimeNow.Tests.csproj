@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangeDateTimeKindToUtcCodeFixProviderTests.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="FindingDateTimeNowAnalyzerTests.cs" />
     <Compile Include="FindingNewDateTimeAnalyzerTests.cs" />

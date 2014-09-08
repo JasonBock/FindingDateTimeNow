@@ -32,9 +32,9 @@ namespace FindingDateTimeNow
 
 			var diagnostic = diagnostics.First();
 			var diagnosticSpan = diagnostic.Location.SourceSpan;
-
-			var kindToken = (root.FindToken(diagnosticSpan.Start)
-				.Parent.AncestorsAndSelf().OfType<ArgumentSyntax>().First().Expression as MemberAccessExpressionSyntax).Name;
+			var kindToken = root.FindNode(diagnosticSpan) as IdentifierNameSyntax;
+			//var kindToken = (root.FindToken(diagnosticSpan.Start)
+			//	.Parent.AncestorsAndSelf().OfType<ArgumentSyntax>().First().Expression as MemberAccessExpressionSyntax).Name;
 
 			var newKindToken = SyntaxFactory.IdentifierName("Utc");
 
