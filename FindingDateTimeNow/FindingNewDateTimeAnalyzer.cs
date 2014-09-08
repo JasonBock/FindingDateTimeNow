@@ -58,11 +58,12 @@ namespace FindingDateTimeNow
 
 					if (argument != null)
 					{
-						if (argument.Value.ValueText == "Local" ||
-							argument.Value.ValueText == "Unspecified")
+						var argumentValue = argument.Value;
+						if (argumentValue.ValueText == "Local" ||
+							argumentValue.ValueText == "Unspecified")
 						{
 							addDiagnostic(Diagnostic.Create(FindingNewDateTimeAnalyzer.changeDateTimeKindToUtcRule,
-								argument.Value.GetLocation()));
+								argumentValue.GetLocation()));
 						}
 					}
 					else

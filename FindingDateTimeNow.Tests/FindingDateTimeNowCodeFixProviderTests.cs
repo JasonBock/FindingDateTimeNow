@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 namespace FindingDateTimeNow.Tests
 {
 	[TestClass]
-	public sealed class ChangeDateTimeKindToUtcCodeFixProviderTests
+	public sealed class FindingDateTimeNowCodeFixProviderTests
 	{
 		[TestMethod]
 		public void VerifyGetFixableDiagnosticIds()
 		{
-			var fix = new ChangeDateTimeKindToUtcCodeFixProvider();
+			var fix = new FindingDateTimeNowCodeFixProvider();
 			var ids = fix.GetFixableDiagnosticIds().ToList();
 
 			Assert.AreEqual(1, ids.Count);
-			Assert.AreEqual(FindingNewDateTimeConstants.DiagnosticId, ids[0]);
+			Assert.AreEqual(FindingDateTimeNowConstants.DiagnosticId, ids[0]);
 		}
 
 		[TestMethod]
@@ -30,23 +30,23 @@ public sealed class DateTimeTest
 {
 	public void MyMethod()
 	{
-		var x = new DateTime(10000, DateTimeKind.Local);
+		var x = DateTime.Now;
 	}
 }";
 
 			var document = TestHelpers.CreateDocument(code);
 			var tree = await document.GetSyntaxTreeAsync();
-			var diagnostics = await TestHelpers.GetDiagnosticsAsync<FindingNewDateTimeAnalyzer>(
-				code, document, new TextSpan(97, 8));
+			var diagnostics = await TestHelpers.GetDiagnosticsAsync<FindingDateTimeNowAnalyzer>(
+				code, document, new TextSpan(102, 3));
 			var sourceSpan = diagnostics[0].Location.SourceSpan;
 
-			var fix = new ChangeDateTimeKindToUtcCodeFixProvider();
+			var fix = new FindingDateTimeNowCodeFixProvider();
 			var actions = (await fix.GetFixesAsync(document, sourceSpan, diagnostics,
 				new CancellationToken(false))).ToList();
 
 			Assert.AreEqual(1, actions.Count);
 			var action = actions[0];
-			Assert.AreEqual(FindingNewDateTimeConstants.CodeFixDescription,
+			Assert.AreEqual(FindingDateTimeNowConstants.CodeFixDescription,
 				action.Description);
 
 			var operation = (await action.GetOperationsAsync(
@@ -58,8 +58,8 @@ public sealed class DateTimeTest
 			Assert.AreEqual(1, changes.Count);
 			var change = changes[0];
 			Assert.AreEqual("Utc", change.NewText);
-			Assert.AreEqual(128, change.Span.Start);
-			Assert.AreEqual(133, change.Span.End);
+			Assert.AreEqual(104, change.Span.Start);
+			Assert.AreEqual(104, change.Span.End);
 		}
 	}
 }
