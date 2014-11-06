@@ -1,6 +1,10 @@
-﻿using Microsoft.CodeAnalysis.CodeActions;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CodeActions;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -34,20 +38,22 @@ public sealed class DateTimeTest
 	}
 }";
 
-			var document = TestHelpers.CreateDocument(code);
+			var document = TestHelpers.Create(code);
 			var tree = await document.GetSyntaxTreeAsync();
 			var diagnostics = await TestHelpers.GetDiagnosticsAsync<FindingNewDateTimeAnalyzer>(
-				code, document, new TextSpan(97, 8));
+				document, new TextSpan(97, 8));
 			var sourceSpan = diagnostics[0].Location.SourceSpan;
 
+			var actions = new List<CodeAction>();
+			var codeActionRegistration = new Action<CodeAction, IEnumerable<Diagnostic>>(
+				(a, _) => { actions.Add(a); });
+
 			var fix = new ChangeDateTimeKindToUtcCodeFixProvider();
-			var actions = (await fix.GetFixesAsync(document, sourceSpan, diagnostics,
-				new CancellationToken(false))).ToList();
+			var codeFixContext = new CodeFixContext(document, diagnostics[0], codeActionRegistration, new CancellationToken(false));
+			await fix.ComputeFixesAsync(codeFixContext);
 
 			Assert.AreEqual(1, actions.Count);
 			var action = actions[0];
-			Assert.AreEqual(FindingNewDateTimeConstants.CodeFixDescription,
-				action.Description);
 
 			var operation = (await action.GetOperationsAsync(
 				new CancellationToken(false))).ToArray()[0] as ApplyChangesOperation;

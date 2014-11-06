@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Immutable;
-using System.Threading;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis;
@@ -8,19 +6,20 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace FindingDateTimeNow
 {
-	[DiagnosticAnalyzer]
-	[ExportDiagnosticAnalyzer(FindingNewDateTimeConstants.DiagnosticId, LanguageNames.CSharp)]
+	[DiagnosticAnalyzer(LanguageNames.CSharp)]
 	public sealed class FindingNewDateTimeAnalyzer
-		: ISyntaxNodeAnalyzer<SyntaxKind>
+		: DiagnosticAnalyzer
 	{
 		private static DiagnosticDescriptor changeDateTimeKindToUtcRule = new DiagnosticDescriptor(
-			FindingNewDateTimeConstants.DiagnosticId, FindingNewDateTimeConstants.Description,
-				FindingNewDateTimeConstants.FindingDateTimeNowMessage, "Usage", DiagnosticSeverity.Error, true);
+			FindingNewDateTimeConstants.DiagnosticId, FindingNewDateTimeConstants.Title,
+				FindingNewDateTimeConstants.FindingDateTimeNowMessage,
+				FindingNewDateTimeConstants.Category, DiagnosticSeverity.Error, true);
 		private static DiagnosticDescriptor unspecifiedKindRule = new DiagnosticDescriptor(
-			FindingNewDateTimeConstants.UnspecifiedDiagnosticId, FindingNewDateTimeConstants.Description,
-				FindingNewDateTimeConstants.UnspecifiedKindMessage, "Usage", DiagnosticSeverity.Error, true);
+			FindingNewDateTimeConstants.UnspecifiedDiagnosticId, FindingNewDateTimeConstants.Title,
+				FindingNewDateTimeConstants.UnspecifiedKindMessage,
+				FindingNewDateTimeConstants.Category, DiagnosticSeverity.Error, true);
 
-		public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
+		public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
 		{
 			get
 			{
@@ -29,23 +28,20 @@ namespace FindingDateTimeNow
 			}
 		}
 
-		public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest
+		public override void Initialize(AnalysisContext context)
 		{
-			get
-			{
-				return ImmutableArray.Create(SyntaxKind.ObjectCreationExpression);
-			}
+			context.RegisterSyntaxNodeAction<SyntaxKind>(
+				FindingNewDateTimeAnalyzer.AnalyzeObjectCreationExpression, SyntaxKind.ObjectCreationExpression);
 		}
 
-		public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, 
-			AnalyzerOptions options, CancellationToken cancellationToken)
+		private static void AnalyzeObjectCreationExpression(SyntaxNodeAnalysisContext context)
 		{
-			var creationNode = (ObjectCreationExpressionSyntax)node;
+			var creationNode = (ObjectCreationExpressionSyntax)context.Node;
 			var creationNameNode = creationNode.Type as IdentifierNameSyntax;
 
 			if (creationNameNode != null)
 			{
-				var creationSymbol = semanticModel.GetSymbolInfo(creationNode).Symbol;
+				var creationSymbol = context.SemanticModel.GetSymbolInfo(creationNode).Symbol;
 
 				if (creationSymbol != null &&
 					creationSymbol.ContainingType.ToDisplayString() ==
@@ -54,7 +50,7 @@ namespace FindingDateTimeNow
 						Values.ExpectedContainingAssemblyDisplayString))
 				{
 					var argument = FindingNewDateTimeAnalyzer.GetInvalidArgument(
-						creationNode, semanticModel);
+						creationNode, context.SemanticModel);
 
 					if (argument != null)
 					{
@@ -62,13 +58,13 @@ namespace FindingDateTimeNow
 						if (argumentValue.ValueText == "Local" ||
 							argumentValue.ValueText == "Unspecified")
 						{
-							addDiagnostic(Diagnostic.Create(FindingNewDateTimeAnalyzer.changeDateTimeKindToUtcRule,
+							context.ReportDiagnostic(Diagnostic.Create(FindingNewDateTimeAnalyzer.changeDateTimeKindToUtcRule,
 								argumentValue.GetLocation()));
 						}
 					}
 					else
 					{
-						addDiagnostic(Diagnostic.Create(FindingNewDateTimeAnalyzer.unspecifiedKindRule,
+						context.ReportDiagnostic(Diagnostic.Create(FindingNewDateTimeAnalyzer.unspecifiedKindRule,
 							creationNode.GetLocation()));
 					}
 				}

@@ -1,5 +1,4 @@
 ﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
@@ -10,15 +9,6 @@ namespace FindingDateTimeNow.Tests
 	public sealed class FindingDateTimeNowAnalyzerTests
 	{
 		[TestMethod]
-		public void VerifySyntaxKindsOfInterest()
-		{
-			var analyzer = new FindingDateTimeNowAnalyzer();
-			var syntaxKinds = analyzer.SyntaxKindsOfInterest;
-			Assert.AreEqual(1, syntaxKinds.Length);
-			Assert.AreEqual(SyntaxKind.SimpleMemberAccessExpression, syntaxKinds[0]);
-		}
-
-		[TestMethod]
 		public void VerifySupportedDiagnostics()
 		{
 			var analyzer = new FindingDateTimeNowAnalyzer();
@@ -26,10 +16,10 @@ namespace FindingDateTimeNow.Tests
 			Assert.AreEqual(1, diagnostics.Length);
 
 			var diagnostic = diagnostics[0];
-			Assert.AreEqual(diagnostic.Id, FindingDateTimeNowConstants.DiagnosticId);
-			Assert.AreEqual(diagnostic.Description, FindingDateTimeNowConstants.Description);
-			Assert.AreEqual(diagnostic.MessageFormat, FindingDateTimeNowConstants.Message);
-			Assert.AreEqual(diagnostic.Category, "Usage");
+			Assert.AreEqual(diagnostic.Id, FindingDateTimeNowConstants.DiagnosticId, nameof(DiagnosticDescriptor.Id));
+			Assert.AreEqual(diagnostic.Title, FindingDateTimeNowConstants.Title, nameof(DiagnosticDescriptor.Title));
+			Assert.AreEqual(diagnostic.MessageFormat, FindingDateTimeNowConstants.Message, nameof(DiagnosticDescriptor.MessageFormat));
+			Assert.AreEqual(diagnostic.Category, FindingDateTimeNowConstants.Category, nameof(DiagnosticDescriptor.Category));
 			Assert.AreEqual(diagnostic.DefaultSeverity, DiagnosticSeverity.Error);
 		}
 

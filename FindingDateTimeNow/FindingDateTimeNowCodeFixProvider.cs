@@ -3,34 +3,38 @@ using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Text;
-using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Composition;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace FindingDateTimeNow
 {
 	[ExportCodeFixProvider(FindingDateTimeNowConstants.DiagnosticId, LanguageNames.CSharp)]
+	[Shared]
 	public sealed class FindingDateTimeNowCodeFixProvider
-		: ICodeFixProvider
+		: CodeFixProvider
 	{
-		public IEnumerable<string> GetFixableDiagnosticIds()
+		public sealed override ImmutableArray<string> GetFixableDiagnosticIds()
 		{
-			return new[] { FindingDateTimeNowConstants.DiagnosticId };
+			return ImmutableArray.Create(FindingDateTimeNowConstants.DiagnosticId);
 		}
 
-		public async Task<IEnumerable<CodeAction>> GetFixesAsync(Document document, TextSpan span, 
-			IEnumerable<Diagnostic> diagnostics, CancellationToken cancellationToken)
+		public sealed override FixAllProvider GetFixAllProvider()
 		{
-			var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+			return WellKnownFixAllProviders.BatchFixer;
+		}
 
-			if (cancellationToken.IsCancellationRequested)
+		public sealed override async Task ComputeFixesAsync(CodeFixContext context)
+		{
+			var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+
+			if (context.CancellationToken.IsCancellationRequested)
 			{
-				return Enumerable.Empty<CodeAction>();
+				return;
 			}
 
-			var diagnostic = diagnostics.First();
+			var diagnostic = context.Diagnostics.First();
 			var diagnosticSpan = diagnostic.Location.SourceSpan;
 
 			var nowToken = root.FindToken(diagnosticSpan.Start)
@@ -41,11 +45,10 @@ namespace FindingDateTimeNow
 
 			var newRoot = root.ReplaceToken(nowToken, utcNowToken);
 
-			return new[]
-			{
-				CodeAction.Create(FindingDateTimeNowConstants.CodeFixDescription,
-					document.WithSyntaxRoot(newRoot))
-			};
+			context.RegisterFix(
+				CodeAction.Create(
+					FindingDateTimeNowConstants.Title,
+					context.Document.WithSyntaxRoot(newRoot)), diagnostic);
       }
 	}
 }

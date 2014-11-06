@@ -1,11 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FindingDateTimeNow.Tests
@@ -14,15 +9,6 @@ namespace FindingDateTimeNow.Tests
 	public sealed class FindingNewDateTimeAnalyzerTests
 	{
 		[TestMethod]
-		public void VerifySyntaxKindsOfInterest()
-		{
-			var analyzer = new FindingNewDateTimeAnalyzer();
-			var syntaxKinds = analyzer.SyntaxKindsOfInterest;
-			Assert.AreEqual(1, syntaxKinds.Length);
-			Assert.AreEqual(SyntaxKind.ObjectCreationExpression, syntaxKinds[0]);
-		}
-
-		[TestMethod]
 		public void VerifySupportedDiagnostics()
 		{
 			var analyzer = new FindingNewDateTimeAnalyzer();
@@ -30,18 +16,18 @@ namespace FindingDateTimeNow.Tests
 			Assert.AreEqual(2, diagnostics.Length);
 
 			var newDiagnostic = diagnostics[0];
-			Assert.AreEqual(newDiagnostic.Id, FindingNewDateTimeConstants.DiagnosticId);
-			Assert.AreEqual(newDiagnostic.Description, FindingNewDateTimeConstants.Description);
-			Assert.AreEqual(newDiagnostic.MessageFormat, FindingNewDateTimeConstants.FindingDateTimeNowMessage);
-			Assert.AreEqual(newDiagnostic.Category, "Usage");
-			Assert.AreEqual(newDiagnostic.DefaultSeverity, DiagnosticSeverity.Error);
+			Assert.AreEqual(newDiagnostic.Id, FindingNewDateTimeConstants.DiagnosticId, nameof(DiagnosticDescriptor.Id));
+			Assert.AreEqual(newDiagnostic.Title, FindingNewDateTimeConstants.Title, nameof(DiagnosticDescriptor.Title));
+			Assert.AreEqual(newDiagnostic.MessageFormat, FindingNewDateTimeConstants.FindingDateTimeNowMessage, nameof(DiagnosticDescriptor.Title));
+			Assert.AreEqual(newDiagnostic.Category, FindingNewDateTimeConstants.Category, nameof(DiagnosticDescriptor.Category));
+			Assert.AreEqual(newDiagnostic.DefaultSeverity, DiagnosticSeverity.Error, nameof(DiagnosticDescriptor.DefaultSeverity));
 
 			var unspecifiedDiagnostic = diagnostics[1];
-			Assert.AreEqual(unspecifiedDiagnostic.Id, FindingNewDateTimeConstants.UnspecifiedDiagnosticId);
-			Assert.AreEqual(unspecifiedDiagnostic.Description, FindingNewDateTimeConstants.Description);
-			Assert.AreEqual(unspecifiedDiagnostic.MessageFormat, FindingNewDateTimeConstants.UnspecifiedKindMessage);
-			Assert.AreEqual(unspecifiedDiagnostic.Category, "Usage");
-			Assert.AreEqual(unspecifiedDiagnostic.DefaultSeverity, DiagnosticSeverity.Error);
+			Assert.AreEqual(unspecifiedDiagnostic.Id, FindingNewDateTimeConstants.UnspecifiedDiagnosticId, nameof(DiagnosticDescriptor.Id));
+			Assert.AreEqual(unspecifiedDiagnostic.Title, FindingNewDateTimeConstants.Title, nameof(DiagnosticDescriptor.Title));
+			Assert.AreEqual(unspecifiedDiagnostic.MessageFormat, FindingNewDateTimeConstants.UnspecifiedKindMessage, nameof(DiagnosticDescriptor.MessageFormat));
+			Assert.AreEqual(unspecifiedDiagnostic.Category, FindingNewDateTimeConstants.Category, nameof(DiagnosticDescriptor.Category));
+			Assert.AreEqual(unspecifiedDiagnostic.DefaultSeverity, DiagnosticSeverity.Error, nameof(DiagnosticDescriptor.DefaultSeverity));
 		}
 
 		[TestMethod]

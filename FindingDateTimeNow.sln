@@ -1,16 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22013.1
+VisualStudioVersion = 14.0.22231.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindingDateTimeNow", "FindingDateTimeNow\FindingDateTimeNow.csproj", "{38730538-F7B8-4352-8358-BE3ED0CAC4BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindingDateTimeNow", "FindingDateTimeNow\FindingDateTimeNow.csproj", "{8948F7F1-63FC-43DC-99CF-686721933B15}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{751297FC-E06C-41F2-BA9A-3091CB29F3E4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E50CC6D0-6714-4AAA-809E-A2AC3FD846E6}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindingDateTimeNow.Tests", "FindingDateTimeNow.Tests\FindingDateTimeNow.Tests.csproj", "{3CFEB578-D3EC-4EA5-BB05-7C5E48787AA4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindingDateTimeNow.Tests", "FindingDateTimeNow.Tests\FindingDateTimeNow.Tests.csproj", "{10847244-6006-4523-BB72-6041E29480B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindingDateTimeNow.Vsix", "FindingDateTimeNow.Vsix\FindingDateTimeNow.Vsix.csproj", "{50AFDB9A-12AC-474C-BCFD-64B5BADC45A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,14 +20,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{38730538-F7B8-4352-8358-BE3ED0CAC4BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38730538-F7B8-4352-8358-BE3ED0CAC4BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38730538-F7B8-4352-8358-BE3ED0CAC4BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38730538-F7B8-4352-8358-BE3ED0CAC4BB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3CFEB578-D3EC-4EA5-BB05-7C5E48787AA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3CFEB578-D3EC-4EA5-BB05-7C5E48787AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3CFEB578-D3EC-4EA5-BB05-7C5E48787AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3CFEB578-D3EC-4EA5-BB05-7C5E48787AA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8948F7F1-63FC-43DC-99CF-686721933B15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8948F7F1-63FC-43DC-99CF-686721933B15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8948F7F1-63FC-43DC-99CF-686721933B15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8948F7F1-63FC-43DC-99CF-686721933B15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10847244-6006-4523-BB72-6041E29480B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10847244-6006-4523-BB72-6041E29480B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10847244-6006-4523-BB72-6041E29480B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10847244-6006-4523-BB72-6041E29480B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50AFDB9A-12AC-474C-BCFD-64B5BADC45A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50AFDB9A-12AC-474C-BCFD-64B5BADC45A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50AFDB9A-12AC-474C-BCFD-64B5BADC45A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50AFDB9A-12AC-474C-BCFD-64B5BADC45A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
