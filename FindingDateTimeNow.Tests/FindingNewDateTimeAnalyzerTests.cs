@@ -17,15 +17,15 @@ namespace FindingDateTimeNow.Tests
 
 			var newDiagnostic = diagnostics[0];
 			Assert.AreEqual(newDiagnostic.Id, FindingNewDateTimeConstants.DiagnosticId, nameof(DiagnosticDescriptor.Id));
-			Assert.AreEqual(newDiagnostic.Title, FindingNewDateTimeConstants.Title, nameof(DiagnosticDescriptor.Title));
-			Assert.AreEqual(newDiagnostic.MessageFormat, FindingNewDateTimeConstants.FindingDateTimeNowMessage, nameof(DiagnosticDescriptor.Title));
+			Assert.AreEqual(newDiagnostic.Title.ToString(), FindingNewDateTimeConstants.Title, nameof(DiagnosticDescriptor.Title));
+			Assert.AreEqual(newDiagnostic.MessageFormat.ToString(), FindingNewDateTimeConstants.FindingDateTimeNowMessage, nameof(DiagnosticDescriptor.Title));
 			Assert.AreEqual(newDiagnostic.Category, FindingNewDateTimeConstants.Category, nameof(DiagnosticDescriptor.Category));
 			Assert.AreEqual(newDiagnostic.DefaultSeverity, DiagnosticSeverity.Error, nameof(DiagnosticDescriptor.DefaultSeverity));
 
 			var unspecifiedDiagnostic = diagnostics[1];
 			Assert.AreEqual(unspecifiedDiagnostic.Id, FindingNewDateTimeConstants.UnspecifiedDiagnosticId, nameof(DiagnosticDescriptor.Id));
-			Assert.AreEqual(unspecifiedDiagnostic.Title, FindingNewDateTimeConstants.Title, nameof(DiagnosticDescriptor.Title));
-			Assert.AreEqual(unspecifiedDiagnostic.MessageFormat, FindingNewDateTimeConstants.UnspecifiedKindMessage, nameof(DiagnosticDescriptor.MessageFormat));
+			Assert.AreEqual(unspecifiedDiagnostic.Title.ToString(), FindingNewDateTimeConstants.Title, nameof(DiagnosticDescriptor.Title));
+			Assert.AreEqual(unspecifiedDiagnostic.MessageFormat.ToString(), FindingNewDateTimeConstants.UnspecifiedKindMessage, nameof(DiagnosticDescriptor.MessageFormat));
 			Assert.AreEqual(unspecifiedDiagnostic.Category, FindingNewDateTimeConstants.Category, nameof(DiagnosticDescriptor.Category));
 			Assert.AreEqual(unspecifiedDiagnostic.DefaultSeverity, DiagnosticSeverity.Error, nameof(DiagnosticDescriptor.DefaultSeverity));
 		}

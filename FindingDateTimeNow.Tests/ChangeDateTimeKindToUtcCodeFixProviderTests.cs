@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -45,7 +46,7 @@ public sealed class DateTimeTest
 			var sourceSpan = diagnostics[0].Location.SourceSpan;
 
 			var actions = new List<CodeAction>();
-			var codeActionRegistration = new Action<CodeAction, IEnumerable<Diagnostic>>(
+			var codeActionRegistration = new Action<CodeAction, ImmutableArray<Diagnostic>>(
 				(a, _) => { actions.Add(a); });
 
 			var fix = new ChangeDateTimeKindToUtcCodeFixProvider();

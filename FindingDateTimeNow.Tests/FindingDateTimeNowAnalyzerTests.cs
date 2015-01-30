@@ -17,8 +17,8 @@ namespace FindingDateTimeNow.Tests
 
 			var diagnostic = diagnostics[0];
 			Assert.AreEqual(diagnostic.Id, FindingDateTimeNowConstants.DiagnosticId, nameof(DiagnosticDescriptor.Id));
-			Assert.AreEqual(diagnostic.Title, FindingDateTimeNowConstants.Title, nameof(DiagnosticDescriptor.Title));
-			Assert.AreEqual(diagnostic.MessageFormat, FindingDateTimeNowConstants.Message, nameof(DiagnosticDescriptor.MessageFormat));
+			Assert.AreEqual(diagnostic.Title.ToString(), FindingDateTimeNowConstants.Title, nameof(DiagnosticDescriptor.Title));
+			Assert.AreEqual(diagnostic.MessageFormat.ToString(), FindingDateTimeNowConstants.Message, nameof(DiagnosticDescriptor.MessageFormat));
 			Assert.AreEqual(diagnostic.Category, FindingDateTimeNowConstants.Category, nameof(DiagnosticDescriptor.Category));
 			Assert.AreEqual(diagnostic.DefaultSeverity, DiagnosticSeverity.Error);
 		}

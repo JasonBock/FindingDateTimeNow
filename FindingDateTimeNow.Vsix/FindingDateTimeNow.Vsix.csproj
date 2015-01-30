@@ -10,12 +10,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectTypeGuids>{82b43b9b-a64c-4715-b499-d71e9ca2bd60};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <ProjectGuid>{66766443-5FF3-4C69-AC4E-EDD2AE0946F8}</ProjectGuid>
+    <ProjectGuid>{E2DAECD8-1398-49D1-9A8F-C526A5BEC0EE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FindingDateTimeNow</RootNamespace>
     <AssemblyName>FindingDateTimeNow</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <GeneratePkgDefFile>false</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>false</IncludeAssemblyInVSIXContainer>
     <IncludeDebugSymbolsInVSIXContainer>false</IncludeDebugSymbolsInVSIXContainer>
@@ -32,7 +32,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -41,7 +40,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
     <StartAction>Program</StartAction>
@@ -55,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FindingDateTimeNow\FindingDateTimeNow.csproj">
-      <Project>{9BC07EBB-56F9-47F4-934D-87DA5BF7AAD5}</Project>
+      <Project>{E75D7E83-654A-471E-9A8F-5768A7E7D38D}</Project>
       <Name>FindingDateTimeNow</Name>
     </ProjectReference>
   </ItemGroup>
