@@ -15,9 +15,12 @@ namespace FindingDateTimeNow
 	public sealed class ChangeDateTimeKindToUtcCodeFixProvider
 		: CodeFixProvider
 	{
-		public sealed override ImmutableArray<string> GetFixableDiagnosticIds()
+		public override ImmutableArray<string> FixableDiagnosticIds
 		{
-			return ImmutableArray.Create(FindingNewDateTimeConstants.DiagnosticId);
+			get
+			{
+				return ImmutableArray.Create(FindingNewDateTimeConstants.DiagnosticId);
+			}
 		}
 
 		public sealed override FixAllProvider GetFixAllProvider()
@@ -25,7 +28,7 @@ namespace FindingDateTimeNow
 			return WellKnownFixAllProviders.BatchFixer;
 		}
 
-		public sealed override async Task ComputeFixesAsync(CodeFixContext context)
+		public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
 		{
 			var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
 
@@ -42,9 +45,9 @@ namespace FindingDateTimeNow
 
 			var newRoot = root.ReplaceNode(kindToken, newKindToken);
 
-			context.RegisterFix(
+			context.RegisterCodeFix(
 				CodeAction.Create(FindingNewDateTimeConstants.CodeFixDescription,
-					context.Document.WithSyntaxRoot(newRoot)), diagnostic);
-      }
+					_ => Task.FromResult<Document>(context.Document.WithSyntaxRoot(newRoot))), diagnostic);
+		}
 	}
 }

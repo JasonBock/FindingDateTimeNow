@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="FindingDateTimeNow.Vsix..32ca3c7c-7418-424f-822d-de6b4abe3b44" Version="1.0" Language="en-US" Publisher="JASON"/>
+    <Identity Id="FindingDateTimeNow.Vsix..315bdbcc-b588-447d-a8b3-f77f93cbae17" Version="1.0" Language="en-US" Publisher="JASON"/>
     <DisplayName>FindingDateTimeNow.Vsix</DisplayName>
     <Description xml:space="preserve">This is a sample diagnostic extension for the .NET Compiler Platform ("Roslyn").</Description>
   </Metadata>

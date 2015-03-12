@@ -16,10 +16,10 @@ namespace FindingDateTimeNow.Tests
 	public sealed class ChangeDateTimeKindToUtcCodeFixProviderTests
 	{
 		[TestMethod]
-		public void VerifyGetFixableDiagnosticIds()
+		public void VerifyFixableDiagnosticIds()
 		{
 			var fix = new ChangeDateTimeKindToUtcCodeFixProvider();
-			var ids = fix.GetFixableDiagnosticIds().ToList();
+			var ids = fix.FixableDiagnosticIds.ToList();
 
 			Assert.AreEqual(1, ids.Count);
 			Assert.AreEqual(FindingNewDateTimeConstants.DiagnosticId, ids[0]);
@@ -51,7 +51,7 @@ public sealed class DateTimeTest
 
 			var fix = new ChangeDateTimeKindToUtcCodeFixProvider();
 			var codeFixContext = new CodeFixContext(document, diagnostics[0], codeActionRegistration, new CancellationToken(false));
-			await fix.ComputeFixesAsync(codeFixContext);
+			await fix.RegisterCodeFixesAsync(codeFixContext);
 
 			Assert.AreEqual(1, actions.Count);
 			var action = actions[0];

@@ -26,14 +26,11 @@ namespace FindingDateTimeNow.Tests
 		{
 			var root = await document.GetSyntaxRootAsync();
 			var node = root.FindNode(methodDeclarationSpan);
-
-			var compilation = await document.Project.GetCompilationAsync();
 			var analyzer = new TAnalyzer();
 
-			var driver = AnalyzerDriver.Create(compilation, ImmutableArray.Create(analyzer as DiagnosticAnalyzer),
-				null, out compilation, CancellationToken.None);
-			compilation.GetDiagnostics();
-			return (await driver.GetDiagnosticsAsync()).ToList();
+			var compilation = (await document.Project.GetCompilationAsync())
+				.WithAnalyzers(ImmutableArray.Create(analyzer as DiagnosticAnalyzer));
+			return (await compilation.GetAnalyzerDiagnosticsAsync()).ToList();
 		}
 
 		internal static Document Create(string code)
@@ -41,7 +38,7 @@ namespace FindingDateTimeNow.Tests
 			var projectName = "Test";
 			var projectId = ProjectId.CreateNewId(projectName);
 
-			var solution = new CustomWorkspace()
+			var solution = new AdhocWorkspace()
 				 .CurrentSolution
 				 .AddProject(projectId, projectName, projectName, LanguageNames.CSharp)
 				 .WithProjectCompilationOptions(projectId, new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary))

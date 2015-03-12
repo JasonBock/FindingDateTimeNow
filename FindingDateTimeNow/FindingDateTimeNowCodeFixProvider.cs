@@ -15,9 +15,12 @@ namespace FindingDateTimeNow
 	public sealed class FindingDateTimeNowCodeFixProvider
 		: CodeFixProvider
 	{
-		public sealed override ImmutableArray<string> GetFixableDiagnosticIds()
+		public override ImmutableArray<string> FixableDiagnosticIds
 		{
-			return ImmutableArray.Create(FindingDateTimeNowConstants.DiagnosticId);
+			get
+			{
+				return ImmutableArray.Create(FindingDateTimeNowConstants.DiagnosticId);
+			}
 		}
 
 		public sealed override FixAllProvider GetFixAllProvider()
@@ -25,7 +28,7 @@ namespace FindingDateTimeNow
 			return WellKnownFixAllProviders.BatchFixer;
 		}
 
-		public sealed override async Task ComputeFixesAsync(CodeFixContext context)
+		public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
 		{
 			var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
 
@@ -40,15 +43,15 @@ namespace FindingDateTimeNow
 			var nowToken = root.FindToken(diagnosticSpan.Start)
 				.Parent.AncestorsAndSelf().OfType<IdentifierNameSyntax>().First().GetFirstToken();
 
-			var utcNowToken = SyntaxFactory.Identifier(nowToken.LeadingTrivia, 
+			var utcNowToken = SyntaxFactory.Identifier(nowToken.LeadingTrivia,
 				"UtcNow", nowToken.TrailingTrivia);
 
 			var newRoot = root.ReplaceToken(nowToken, utcNowToken);
 
-			context.RegisterFix(
+			context.RegisterCodeFix(
 				CodeAction.Create(
 					FindingDateTimeNowConstants.Title,
-					context.Document.WithSyntaxRoot(newRoot)), diagnostic);
-      }
+					_ => Task.FromResult<Document>(context.Document.WithSyntaxRoot(newRoot))), diagnostic);
+		}
 	}
 }

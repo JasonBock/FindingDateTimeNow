@@ -1,18 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22512.0
+VisualStudioVersion = 14.0.22609.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindingDateTimeNow", "FindingDateTimeNow\FindingDateTimeNow.csproj", "{E75D7E83-654A-471E-9A8F-5768A7E7D38D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindingDateTimeNow", "FindingDateTimeNow\FindingDateTimeNow.csproj", "{7BF3E343-40BC-4D10-8224-A827937DA825}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{5EF6F4B6-BC9C-4670-992C-D10757451185}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindingDateTimeNow.Tests", "FindingDateTimeNow.Tests\FindingDateTimeNow.Tests.csproj", "{3757FE92-D34B-4641-AF14-E08DCE622A57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindingDateTimeNow.Test", "FindingDateTimeNow.Tests\FindingDateTimeNow.Tests.csproj", "{1C120F5D-1388-469F-83F0-C37B5AFAD3C9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindingDateTimeNow.Vsix", "FindingDateTimeNow.Vsix\FindingDateTimeNow.Vsix.csproj", "{E2DAECD8-1398-49D1-9A8F-C526A5BEC0EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindingDateTimeNow.Vsix", "FindingDateTimeNow.Vsix\FindingDateTimeNow.Vsix.csproj", "{C3B3557F-4BA1-40C7-8131-187F6AC85ACA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,18 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E75D7E83-654A-471E-9A8F-5768A7E7D38D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E75D7E83-654A-471E-9A8F-5768A7E7D38D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E75D7E83-654A-471E-9A8F-5768A7E7D38D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E75D7E83-654A-471E-9A8F-5768A7E7D38D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1C120F5D-1388-469F-83F0-C37B5AFAD3C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1C120F5D-1388-469F-83F0-C37B5AFAD3C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1C120F5D-1388-469F-83F0-C37B5AFAD3C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1C120F5D-1388-469F-83F0-C37B5AFAD3C9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E2DAECD8-1398-49D1-9A8F-C526A5BEC0EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E2DAECD8-1398-49D1-9A8F-C526A5BEC0EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E2DAECD8-1398-49D1-9A8F-C526A5BEC0EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E2DAECD8-1398-49D1-9A8F-C526A5BEC0EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BF3E343-40BC-4D10-8224-A827937DA825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BF3E343-40BC-4D10-8224-A827937DA825}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BF3E343-40BC-4D10-8224-A827937DA825}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BF3E343-40BC-4D10-8224-A827937DA825}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3757FE92-D34B-4641-AF14-E08DCE622A57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3757FE92-D34B-4641-AF14-E08DCE622A57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3757FE92-D34B-4641-AF14-E08DCE622A57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3757FE92-D34B-4641-AF14-E08DCE622A57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3B3557F-4BA1-40C7-8131-187F6AC85ACA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3B3557F-4BA1-40C7-8131-187F6AC85ACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3B3557F-4BA1-40C7-8131-187F6AC85ACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3B3557F-4BA1-40C7-8131-187F6AC85ACA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
