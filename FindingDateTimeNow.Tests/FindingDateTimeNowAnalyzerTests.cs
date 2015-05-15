@@ -1,6 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace FindingDateTimeNow.Tests
@@ -26,16 +27,8 @@ namespace FindingDateTimeNow.Tests
 		[TestMethod]
 		public async Task AnalyzeWhenCallingDateTimeNow()
 		{
-			var code = @"
-using System;
-
-public sealed class DateTimeTest
-{
-	public void MyMethod()
-	{
-		var x = DateTime.Now;
-	}
-}";
+			var code = File.ReadAllText(
+				$@"Targets\{nameof(FindingDateTimeNowAnalyzerTests)}.{nameof(FindingDateTimeNowAnalyzerTests.AnalyzeWhenCallingDateTimeNow)}.cs");
 
 			var diagnostics = await TestHelpers.GetDiagnosticsAsync<FindingDateTimeNowAnalyzer>(
 				code, new TextSpan(102, 3));
@@ -45,16 +38,8 @@ public sealed class DateTimeTest
 		[TestMethod]
 		public async Task AnalyzeWhenCallingDateTimeNowWithAlias()
 		{
-			var code = @"
-using DT = System.DateTime;
-
-public sealed class DateTimeTest
-{
-	public void MyMethod()
-	{
-		var x = DT.Now;
-	}
-}";
+			var code = File.ReadAllText(
+				$@"Targets\{nameof(FindingDateTimeNowAnalyzerTests)}.{nameof(FindingDateTimeNowAnalyzerTests.AnalyzeWhenCallingDateTimeNowWithAlias)}.cs");
 
 			var diagnostics = await TestHelpers.GetDiagnosticsAsync<FindingDateTimeNowAnalyzer>(
 				code, new TextSpan(110, 3));
@@ -64,16 +49,8 @@ public sealed class DateTimeTest
 		[TestMethod]
 		public async Task AnalyzeWhenCallingDateTimeUtcNow()
 		{
-			var code = @"
-using System;
-
-public sealed class DateTimeTest
-{
-	public void MyMethod()
-	{
-		var x = DateTime.UtcNow;
-	}
-}";
+			var code = File.ReadAllText(
+				$@"Targets\{nameof(FindingDateTimeNowAnalyzerTests)}.{nameof(FindingDateTimeNowAnalyzerTests.AnalyzeWhenCallingDateTimeUtcNow)}.cs");
 
 			var diagnostics = await TestHelpers.GetDiagnosticsAsync<FindingDateTimeNowAnalyzer>(
 				code, new TextSpan(102, 6));
@@ -83,16 +60,8 @@ public sealed class DateTimeTest
 		[TestMethod]
 		public async Task AnalyzeWhenCallingDateTimeUtcNowWithAlias()
 		{
-			var code = @"
-using DT = System.DateTime;
-
-public sealed class DateTimeTest
-{
-	public void MyMethod()
-	{
-		var x = DT.UtcNow;
-	}
-}";
+			var code = File.ReadAllText(
+				$@"Targets\{nameof(FindingDateTimeNowAnalyzerTests)}.{nameof(FindingDateTimeNowAnalyzerTests.AnalyzeWhenCallingDateTimeUtcNowWithAlias)}.cs");
 
 			var diagnostics = await TestHelpers.GetDiagnosticsAsync<FindingDateTimeNowAnalyzer>(
 				code, new TextSpan(110, 6));
@@ -102,18 +71,8 @@ public sealed class DateTimeTest
 		[TestMethod]
 		public async Task AnalyzeWhenCallingNowAsAProperty()
 		{
-			var code = @"
-using System;
-
-public sealed class DateTimeTest
-{
-	public void MyMethod()
-	{
-		var x = this.Now;
-	}
-
-	public string Now { get; set; }
-}";
+			var code = File.ReadAllText(
+				$@"Targets\{nameof(FindingDateTimeNowAnalyzerTests)}.{nameof(FindingDateTimeNowAnalyzerTests.AnalyzeWhenCallingNowAsAProperty)}.cs");
 
 			var diagnostics = await TestHelpers.GetDiagnosticsAsync<FindingDateTimeNowAnalyzer>(
 				code, new TextSpan(98, 3));
